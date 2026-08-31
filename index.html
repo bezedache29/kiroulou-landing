@@ -133,17 +133,17 @@
       <span>Bretagne, France</span>
       <a href="mailto:contact@bezedache.com">contact@bezedache.com</a>
       <a href="https://bezedache.com" target="_blank" rel="noopener">Un site par bezedache.com</a>
-      <button type="button" class="link-btn" id="cookieManage">Gérer les cookies</button>
+      <button type="button" class="link-btn" id="noticeManage">Gérer les cookies</button>
     </div>
   </div>
 </footer>
 
-<div class="cookie-banner" id="cookieBanner" hidden>
-  <div class="wrap cookie-banner-inner">
+<div class="site-notice" id="siteNotice" hidden>
+  <div class="wrap site-notice-inner">
     <p>Le formulaire d'inscription utilise Tally, qui peut déposer des cookies. Vous pouvez les accepter ou les refuser — le formulaire reste accessible via un lien direct dans les deux cas.</p>
-    <div class="cookie-actions">
-      <button type="button" class="btn-outline" id="cookieDecline">Refuser</button>
-      <button type="button" class="btn" id="cookieAccept">Accepter</button>
+    <div class="site-notice-actions">
+      <button type="button" class="btn-outline" id="noticeDecline">Refuser</button>
+      <button type="button" class="btn" id="noticeAccept">Accepter</button>
     </div>
   </div>
 </div>
@@ -153,10 +153,10 @@
   var STORAGE_KEY = 'kiroulou_cookie_consent';
   var TALLY_SCRIPT_SRC = 'https://tally.so/widgets/embed.js';
 
-  var banner = document.getElementById('cookieBanner');
-  var acceptBtn = document.getElementById('cookieAccept');
-  var declineBtn = document.getElementById('cookieDecline');
-  var manageBtn = document.getElementById('cookieManage');
+  var banner = document.getElementById('siteNotice');
+  var acceptBtn = document.getElementById('noticeAccept');
+  var declineBtn = document.getElementById('noticeDecline');
+  var manageBtn = document.getElementById('noticeManage');
   var fallback = document.getElementById('formFallback');
   var iframe = document.getElementById('tallyIframe');
 

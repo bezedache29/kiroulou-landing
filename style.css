@@ -255,7 +255,7 @@
   }
 
   /* ---------- COOKIE BANNER ---------- */
-  .cookie-banner{
+  .site-notice{
     position:fixed;
     left:0; right:0; bottom:0;
     z-index:100;
@@ -263,28 +263,28 @@
     border-top:1px solid var(--line);
     box-shadow:0 -8px 24px rgba(43,31,43,0.14);
   }
-  .cookie-banner-inner{
+  .site-notice-inner{
     display:flex;
     align-items:center;
     justify-content:space-between;
     gap:24px;
     padding:22px 28px;
   }
-  .cookie-banner p{
+  .site-notice p{
     font-size:.92rem;
     color:#463B46;
     max-width:640px;
   }
-  .cookie-actions{
+  .site-notice-actions{
     display:flex;
     gap:12px;
     flex-shrink:0;
   }
 
   @media (max-width: 760px){
-    .cookie-banner-inner{ flex-direction:column; align-items:stretch; }
-    .cookie-actions{ width:100%; }
-    .cookie-actions button{ flex:1; justify-content:center; }
+    .site-notice-inner{ flex-direction:column; align-items:stretch; }
+    .site-notice-actions{ width:100%; }
+    .site-notice-actions button{ flex:1; justify-content:center; }
     .signpost-list, .waypoints{ grid-template-columns:1fr; }
     .signpost{ border-left:none; border-top:3px solid var(--sage-dark); padding-left:0; padding-top:14px; }
     .silhouette{ width:260px; opacity:.08; }
