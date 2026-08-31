@@ -24,7 +24,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;900&family=Karla:wght@400;500;600;700&display=swap" rel="stylesheet">
-<script async src="https://tally.so/widgets/embed.js"></script>
 <link rel="stylesheet" href="style.css">
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -107,12 +106,17 @@
       <p class="signup-sub">Laissez votre email pour tester la bêta gratuitement, dès son lancement en Bretagne — que vous soyez pratiquant ou club organisateur.</p>
       <div class="form-card">
         <iframe
+          id="tallyIframe"
           data-tally-src="https://tally.so/embed/Mexzk0?hideTitle=1&transparentBackground=1&dynamicHeight=1"
           loading="lazy"
           width="100%"
           height="500"
           title="Inscription bêta KiRoulOu">
         </iframe>
+        <div class="form-fallback" id="formFallback" hidden>
+          <p>Le formulaire nécessite l'acceptation des cookies Tally.</p>
+          <a class="btn" href="https://tally.so/r/Mexzk0" target="_blank" rel="noopener">Ouvrir le formulaire</a>
+        </div>
         <noscript>
           <p>Le formulaire nécessite JavaScript. <a href="https://tally.so/r/Mexzk0" target="_blank" rel="noopener">Ouvrez-le directement sur Tally</a>.</p>
         </noscript>
@@ -129,9 +133,78 @@
       <span>Bretagne, France</span>
       <a href="mailto:contact@bezedache.com">contact@bezedache.com</a>
       <a href="https://bezedache.com" target="_blank" rel="noopener">Un site par bezedache.com</a>
+      <button type="button" class="link-btn" id="cookieManage">Gérer les cookies</button>
     </div>
   </div>
 </footer>
+
+<div class="cookie-banner" id="cookieBanner" hidden>
+  <div class="wrap cookie-banner-inner">
+    <p>Le formulaire d'inscription utilise Tally, qui peut déposer des cookies. Vous pouvez les accepter ou les refuser — le formulaire reste accessible via un lien direct dans les deux cas.</p>
+    <div class="cookie-actions">
+      <button type="button" class="btn-outline" id="cookieDecline">Refuser</button>
+      <button type="button" class="btn" id="cookieAccept">Accepter</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var STORAGE_KEY = 'kiroulou_cookie_consent';
+  var TALLY_SCRIPT_SRC = 'https://tally.so/widgets/embed.js';
+
+  var banner = document.getElementById('cookieBanner');
+  var acceptBtn = document.getElementById('cookieAccept');
+  var declineBtn = document.getElementById('cookieDecline');
+  var manageBtn = document.getElementById('cookieManage');
+  var fallback = document.getElementById('formFallback');
+  var iframe = document.getElementById('tallyIframe');
+
+  function loadTally(){
+    if (document.getElementById('tally-embed-script')) return;
+    var s = document.createElement('script');
+    s.id = 'tally-embed-script';
+    s.async = true;
+    s.src = TALLY_SCRIPT_SRC;
+    document.body.appendChild(s);
+    iframe.hidden = false;
+    fallback.hidden = true;
+  }
+
+  function showFallback(){
+    iframe.hidden = true;
+    fallback.hidden = false;
+  }
+
+  function getConsent(){
+    try { return localStorage.getItem(STORAGE_KEY); } catch(e) { return null; }
+  }
+
+  function setConsent(value){
+    try { localStorage.setItem(STORAGE_KEY, value); } catch(e) {}
+  }
+
+  function applyConsent(value){
+    setConsent(value);
+    banner.hidden = true;
+    if (value === 'accepted') { loadTally(); } else { showFallback(); }
+  }
+
+  var consent = getConsent();
+  if (consent === 'accepted') {
+    loadTally();
+  } else if (consent === 'declined') {
+    showFallback();
+  } else {
+    banner.hidden = false;
+    showFallback();
+  }
+
+  acceptBtn.addEventListener('click', function(){ applyConsent('accepted'); });
+  declineBtn.addEventListener('click', function(){ applyConsent('declined'); });
+  manageBtn.addEventListener('click', function(){ banner.hidden = false; });
+})();
+</script>
 
 </body>
 </html>
