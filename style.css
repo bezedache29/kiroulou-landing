@@ -242,6 +242,14 @@
     flex-wrap:wrap;
   }
   .footer-meta a{ text-decoration:none; border-bottom:1px solid var(--line); }
+  .social-link{
+    display:inline-flex;
+    align-items:center;
+    border-bottom:none !important;
+    color:#6B6270;
+  }
+  .social-link:hover{ color:var(--ink); }
+  .social-link svg{ width:18px; height:18px; fill:currentColor; }
   .link-btn{
     font:inherit;
     color:inherit;
